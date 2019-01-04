@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>test</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <canvas id="canvas" Style="border:solid black thin" width="600px" height="500px"></canvas>
+    <script>
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext('2d');
+        const WIDTH = canvas.width;
+        const HEIGHT = canvas.height;
+        var img = new Image();
+        img.src = "imgs/timg.jpg";
+        var rangeX = []; //用来存储生成的十组x坐标//这里的气泡属性用一个对象来进行封装，再将对象存储在数组中更恰当
+        var rangeY = []; //用来存储生成的十组y坐标
+        var rangeR = []; //用来存储生成的十足气泡的半径
+        var red = []; //用来存储红色的数值
+        var green = []; //用来存储绿色的数值
+        var blue = []; //用来存储蓝色的数值
+        for (var i = 0; i < 5; i++) { //事先生成十组气泡的x坐标和半径
+            var r = Math.random() * 50;
+            var x = WIDTH * Math.random();
+            if (x < r) {
+                x = r;
+            }
+            if (x > WIDTH - r) {
+                x = WIDTH - r;
+            }
+            var y = WIDTH * Math.random();
+            if (y < r) {
+                y = r;
+            }
+            if (y > WIDTH - r) {
+                y = WIDTH - r;
+            }
+            rangeX[i] = x;
+            rangeR[i] = r;
+            rangeY[i] = y;
+            red[i] = Math.random() * 255;
+            green[i] = Math.random() * 255;
+            blue[i] = Math.random() * 255;
+        }
+        var algha = 0.3;
+        var tag = 1; //设一个标记，标记气泡是在往下走还是往上走，往下是1，往上是0
+        var setinterval = setInterval(function() {
+            context.beginPath();
+            context.drawImage(img, 0, 0);
+            for (var i = 0; i < 20; i++) {
+                var randomX = Math.random() * 3;
+                var randomY = Math.random() * 3;
+                if (tag === 1) {
+                    if (rangeX[i] + rangeR[i] >= WIDTH && rangeY[i] + rangeR[i] >= HEIGHT) {
+                        tag = 0;
+                    }
+                    context.beginPath();
+                    rangeX[i] = rangeX[i] + randomX;
+                    rangeY[i] = rangeY[i] + randomY;
+                    context.arc(rangeX[i], rangeY[i], rangeR[i], 0, Math.PI * 2, false);
+                    context.fillStyle = "rgba(" + red[i] + "," + green[i] + "," + blue[i] + "," + algha + ")";
+                    context.fill();
+                } else {
+                    if (rangeX[i] - rangeR[i] <= 0 && rangeY[i] - rangeR[i] <= 0) {
+                        tag = 1;
+                    }
+                    context.beginPath();
+                    rangeX[i] = rangeX[i] - randomX;
+                    rangeY[i] = rangeY[i] - randomY;
+                    context.arc(rangeX[i], rangeY[i], rangeR[i], 0, Math.PI * 2, false);
+                    context.fillStyle = "rgba(" + red[i] + "," + green[i] + "," + blue[i] + "," + algha + ")";
+                    context.fill();
+                }
+
+
+            }
+            context.closePath();
+        }, 100);
+    </script>
+</body>
+
+</html>

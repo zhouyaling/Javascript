@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>普通圆</div>
+    <canvas id="canvas" style="width:200px;height: 200px;"></canvas>
+    <div>线性渐变圆</div>
+    <canvas id="canvas1" style="width:200px;height: 200px;"></canvas>
+</body>
+<script>
+    var canvas = document.getElementById("canvas");
+    canvas.width = 200;
+    canvas.height = 200;
+    var cxt = canvas.getContext("2d");
+    cxt.beginPath();
+    cxt.arc(60, 60, 50, 0 * Math.PI, 2 * Math.PI); // 画圆
+    cxt.lineWidth = 5; // 线条宽度
+    cxt.strokeStyle = "#999999"; // 线条颜色
+    cxt.stroke();
+
+    var canvas1 = document.getElementById("canvas1");
+    canvas1.width = 200;
+    canvas1.height = 200;
+    var cxt1 = canvas1.getContext("2d");
+    var rad = Math.PI * 2 / 100; //将360度分成100份，那么每一份就是rad度
+
+    var grad = cxt1.createLinearGradient(0, 0, 0, 100);
+    grad.addColorStop(0, 'rgba(72,100,230,1)');
+    grad.addColorStop(0.5, 'rgba(72,100,230,0.4)');
+    grad.addColorStop(1, 'rgba(72,100,230,1)');
+
+    cxt1.beginPath();
+    cxt1.arc(60, 60, 50, 83 * rad, 80 * rad); // 画圆
+    cxt1.lineWidth = 5; // 线条宽度
+    cxt1.strokeStyle = grad; // 线条颜色
+    cxt1.stroke();
+</script>
+
+</html>

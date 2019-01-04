@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>px-em对比</title>
+</head>
+<style>
+    html {
+        font-size: 62.5%;
+    }
+    
+    body {
+        font-size: 62.5%;
+    }
+    
+    .px {
+        font-size: 12px;
+    }
+    
+    .sub-px {
+        font-size: 12px;
+    }
+    
+    .em {
+        font-size: 1.2em;
+    }
+    
+    .sub-em {
+        font-size: 1.2em;
+    }
+    
+    .rem {
+        font-size: 1.2rem;
+    }
+</style>
+
+<body>
+
+</body>
+<div>1em = 16px</div>
+<div>body中声明font-size=62.5%,然后使用em单位，1em=16*62.5%px=10px,注意：em单位会根据父级元素大小改变</div>
+<div>html中声明font-size=62.5%,然后使用rem单位，1rem=16*62.5%px=10px</div>
+<div class="px">这是px</div>
+<div class="em">这是em
+    <div class="">这是em-</div>
+    <div class="sub-px">这是sub-px</div>
+    <div class="sub-em">这是sub-em</div>
+</div>
+<div class="rem">这是rem</div>
+
+</html>

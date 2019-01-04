@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>渐变圈和旋转小球</title>
+    <style>
+        #earthCanvas,
+        #gameCanvas {
+            width: 100%;
+            height: 15em;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <canvas id="gameCanvas">
+                </canvas>
+        <canvas id="earthCanvas">
+                </canvas>
+    </div>
+
+    <script src="lib/jquery.min.js"></script>
+    <script>
+        function canvasProgrss(miletargetTarmileage, progress) {
+            var canvasWidth = $("#gameCanvas").width();
+            var canvasHeight = $("#gameCanvas").height();
+            var canvas = document.getElementById('gameCanvas'); //画布对象
+            canvas.width = canvasWidth;
+            canvas.height = canvasHeight;
+            var ctx = canvas.getContext('2d');
+            //var progress = 50; 当前已加载的进度
+            var progressPercent = progress * 100 / miletargetTarmileage;
+            if (miletargetTarmileage <= 0) {
+                progressPercent = 100;
+            };
+            if (progress == 0) {
+                progressPercent = 0;
+            }
+
+            function canvastxt(progress, progressPercent) {
+                ctx.lineWidth = 10;
+                ctx.strokeStyle = '#fda2a2';
+                ctx.clearRect(0, 0, canvasWidth, canvasHeight); //清除已绘制内容
+                ctx.beginPath();
+                ctx.arc(canvasWidth / 2, canvasHeight / 2, 80, 0, 180);
+                ctx.stroke(); //对路径进行描边 
+                ctx.closePath();
+                var txtday = progress;
+                ctx.font = '60px 微软雅黑';
+                ctx.fillStyle = '#fff';
+                var txtdayWidth = ctx.measureText(txtday).width;
+                ctx.fillText(txtday, canvasWidth / 2 - txtdayWidth / 2, canvasHeight / 2 + 20); //绘制进度提示文字
+                var txtkm = "目标:" + miletargetTarmileage + "km";
+                ctx.font = '1em 微软雅黑';
+                ctx.lineWidth = 1;
+                var txtkmWidth = ctx.measureText(txtkm).width;
+                ctx.fillText(txtkm, canvasWidth / 2 - txtkmWidth / 2, canvasHeight / 3);
+                //写“km”
+                var txtkm = "km";
+                ctx.font = '1em 微软雅黑';
+                ctx.lineWidth = 1;
+                var txtkmWidth = ctx.measureText(txtkm).width;
+                ctx.fillText(txtkm, canvasWidth / 2 - txtkmWidth / 2, 5 * canvasHeight / 7);
+                //划外圆
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.arc(canvasWidth / 2, canvasHeight / 2, 100, 0, 180);
+                ctx.stroke(); //对路径进行描边 
+                ctx.closePath();
+                var d = 0;
+                ctx.lineWidth = 10;
+                if (progressPercent >= 100) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = 'rgb(0,255,0)';
+                    ctx.lineWidth = 10;
+                    var startAngle = -90 * Math.PI / 180;
+                    var endAngle = (-90 + 360 * progressPercent / 100) * Math.PI / 180;
+                    ctx.arc(canvasWidth / 2, canvasHeight / 2, 80, startAngle, endAngle);
+                    ctx.stroke();
+                } else {
+                    var timer = setInterval(function() {
+                        //ctx.clearRect(0,0,canvasWidth,canvasHeight);
+                        ctx.beginPath();
+                        var startAngle = (-90 + 360 * (d++) / 500) * Math.PI / 180;
+                        var endAngle = (-90 + 360 * d / 500) * Math.PI / 180;
+                        ctx.arc(canvasWidth / 2, canvasHeight / 2, 80, startAngle, endAngle);
+                        ctx.strokeStyle = "rgb(" + (255 - d * 0.5) + ",255," + (255 - d * 0.5) + ")";
+                        ctx.stroke();
+                        console.log(progressPercent);
+                        console.log(d);
+                        if (d > progressPercent * 5) {
+                            clearInterval(timer);
+                        }
+                    }, 10);
+                }
+                /*ctx.beginPath();
+
+                ctx.strokeStyle = '#d7fa82';
+                ctx.lineWidth = 10;
+                var startAngle = -90 * Math.PI / 180;
+                console.log(progressPercent);
+                var endAngle = (-90 + 360 * progressPercent / 100) * Math.PI / 180;
+                ctx.arc(canvasWidth / 2, canvasHeight / 2, 80, startAngle, endAngle);
+                ctx.stroke(); //对路径进行描边 */
+            }
+            //划旋转小球
+            var canvas1 = document.getElementById('earthCanvas'); //画布对象
+            canvas1.width = canvasWidth;
+            canvas1.height = canvasHeight;
+            var ctx1 = canvas1.getContext('2d');
+            var imgearth = new Image();
+            imgearth.src = "imgs/white.png";
+            imgearth.onload = function() {
+                var n = 0;
+                var i = 0;
+                ctx1.translate(canvasWidth / 2, canvasHeight / 2);
+                var timer = setInterval(function() {
+                    ctx1.clearRect(0, 0, canvasWidth, canvasHeight);
+                    n = n * Math.PI / 100;
+                    ctx1.rotate(n++);
+                    ctx1.drawImage(imgearth, 95, 0, 10, 10);
+                }, 100);
+
+            }
+            canvastxt(progress, progressPercent);
+        }
+        canvasProgrss();
+    </script>
+</body>
+
+</html>
