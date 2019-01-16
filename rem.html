@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>rem長度單位</title>
+    <!-- 瀏覽器默認字體是16px  -->
+    <!-- 在html裡面設置font-size=10px或者font-size=62.5%,即1rem=10px,否則默認1rem=16px; -->
+    <!-- 若遇上谷歌瀏覽器最小字體為12px,則可以在瀏覽器中設置下最小字體為10px -->
+    <style>
+        html {
+            font-size: 20px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            width: 192rem;
+            height: 108rem;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .box {
+            width: 2rem;
+            height: 2rem;
+            background: #ccc;
+        }
+        
+        .box1 {
+            width: 40px;
+            height: 40px;
+            background: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div>長度單位</div>
+    <div class="box">
+
+    </div>
+    <div class="box1">
+
+    </div>
+</body>
+
+</html>

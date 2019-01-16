@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=gbk">
+    <title>Video Test 10: RTSP Streaming</title>
+    <script>
+        function rotateMe() {
+            i = 0;
+            int = setInterval(
+                function() {
+                    video.style.WebkitTransform = 'rotate(' + (i++ % 360) + 'deg)';
+                    video.style.MozTransform = 'rotate(' + (i++ % 360) + 'deg)';
+                    video.style.OTransform = 'rotate(' + (i++ % 360) + 'deg)';
+                }, 50);
+        }
+
+        function resetRotation() {
+            video.style.WebkitTransform = 'rotate(0)';
+            video.style.MozTransform = 'rotate(0)';
+            video.style.OTransform = 'rotate(0)';
+        }
+    </script>
+</head>
+
+<body>
+    <div style="text-align: center;">
+        <video style="transform: rotate(0deg);" id="v1" controls="controls" onmouseover="this.play()" height="240" width="320"> 
+      <source src="rtsp://admin:jkwy8888@10.15.8.183/doc/page/preview.asp">
+      html5 video
+    </video>
+    </div>
+
+    <script>
+        var video = document.getElementsByTagName('video')[0];
+    </script>
+
+    <div style="text-align: center;">
+        <button onclick="video.play()"> &#9654; </button>
+        <button onclick="video.pause()"> &#9724; </button>
+        <button onclick="video.volume += 0.25">Volume Up</button>
+        <button onclick="video.volume -= 0.25">Volume Down</button>
+        <button onclick="video.muted = true">Mute</button>
+        <button onclick="video.muted = false">Unmute</button>
+        <button onclick="rotateMe()"> Start Rotation</button>
+        <button onclick="int=window.clearInterval(int);resetRotation()"> Stop Rotation</button>
+    </div>
+
+</body>
+
+</html>
