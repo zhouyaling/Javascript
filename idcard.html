@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+    <style>
+        .box {
+            width: 500px;
+            text-align: center;
+            margin: 0 auto;
+        }
+        
+        .box button {
+            margin: 20px auto;
+        }
+        
+        .box .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <form>
+            <label for="card">身份证号：</label>
+            <input type="text" name="card" id="card" value="" maxlength="20">
+            <span class="error"></span>
+            <br>
+            <button type="button">提交</button>
+        </form>
+    </div>
+</body>
+<script src="./lib/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        //键盘弹起
+        $('#card').on('keyup', function(e) {
+            if ((e.which >= 48 && e.which <= 57) ||
+                (e.which >= 96 && e.which <= 105) || e.which == 88) {
+                $('.error').text('');
+                //获取当前光标的位置
+                var caret = this.selectionStart;
+                //获取当前的value
+                var value = this.value;
+                //从左边沿到坐标之间的空格数
+                var sp = (value.slice(0, caret).match(/\s/g) || []).length;
+                //去掉所有空格
+                var nospace = value.replace(/\s/g, '');
+                //重新插入空格
+                var curVal = this.value = nospace.replace(/(^(\d{6})|(\d{8}))(?=[^\s])/g, "$1 ").trim();
+                //从左边沿到原坐标之间的空格数
+                var curSp = (curVal.slice(0, caret).match(/\s/g) || []).length
+                    //修正光标位置
+                this.selectionEnd = this.selectionStart = caret + curSp - sp
+            } else {
+                $('.error').text('只能输入数字或X、x');
+            }
+        });
+        //失去焦点
+        $("#card").on('blur', function() {
+            //验证身份证号
+            var value = $(this).val();
+            var val = value.replace(/\s/ig, ""); //去除空格
+            console.log(val);
+            var pattern = /(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+            if (pattern.test(val) == false) {
+                $('.error').text('身份证号码格式不正确');
+            } else {
+                $('.error').text();
+            }
+        });
+        $("button").on('click', function() {
+            var value = $('#card').val();
+            var card = value.replace(/\s/ig, ""); //去除空格
+            if (card == '') {
+                $('.error').text('身份证号码不能为空');
+            } else {
+                alert(card);
+                $.post({
+                    url: "form.php",
+                    data: {
+                        "card": card
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+</html>

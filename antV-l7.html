@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/jquery.min.js"></script>
+    <script src="https://webapi.amap.com/maps?v=1.4.8&key=d085461cccc5e76712b124cbd1beadd9"></script>
+    <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.l7-1.0.0/dist/l7.min.js"></script>
+</head>
+
+<body>
+    <div id="map" style="width:100%;height:900px"></div>
+</body>
+<script>
+    var scene = new L7.Scene({
+        id: 'map',
+        mapStyle: 'dark', // 样式URL
+        center: [121.507674, 31.223043], //[109.40, 20.13], //
+        pitch: 70, // 65.59312320916906,
+        zoom: 15.4,
+        minZoom: 0,
+        maxZoom: 22
+    });
+    // 初始化地图，添加线图层
+    scene.on('loaded', function() {
+        $.get('https://gw.alipayobjects.com/os/rmsportal/kNDVHmyUWAKhWmWXmjxM.json', function(data) {
+            /*   var testData = [];
+              for (var i = 0; i < 1000; i++) {
+                  testData.push(data.features[i]);
+              }
+
+              data.features = testData; */
+            var dataT = {
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
+                        "type": "LineString",
+                        "coordinates": [
+                            [
+                                110.2532958984375,
+                                21.815608175662636,
+                                10
+                            ],
+                            [
+                                111.3519287109375,
+                                21.97361354260756,
+                                20
+                            ],
+                            [
+                                111.4617919921875,
+                                22.329752304376473,
+                                30
+                            ],
+                            [
+                                112.09899902343749,
+                                22.13653163760967,
+                                40
+                            ],
+                            [
+                                111.884765625,
+                                21.9328547363353,
+                                50
+                            ],
+                            [
+                                111.70898437499999,
+                                21.83600579798428,
+                                60
+                            ],
+                            [
+                                111.324462890625,
+                                21.682952865478285,
+                                70
+                            ]
+                        ]
+                    }
+                }, {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
+                        "type": "LineString",
+                        "coordinates": [
+                            [
+                                108.9404296875,
+                                22.070368801349257,
+                                80
+                            ],
+                            [
+                                109.4622802734375,
+                                22.100909350572714,
+                                90
+                            ],
+                            [
+                                109.852294921875,
+                                22.105998799750566,
+                                100
+                            ],
+                            [
+                                110.12695312499999,
+                                22.17214491738176,
+                                110
+                            ]
+                        ]
+                    }
+                }]
+            };
+            debugger;
+            console.log(dataT);
+            scene.LineLayer({
+                zIndex: 2
+            }).source(data).color('#F08D41').animate({
+                enable: true
+            }).render();
+        });
+    });
+
+    $.get('https://gw.alipayobjects.com/os/rmsportal/vmvAxgsEwbpoSWbSYvix.json', function(data) {
+        // var testData = [];
+        //for (var i = 0; i < 10000; i++) {
+        //    testData.push(data.features[i]);
+        //}
+
+        //data.features = testData; 
+        //console.log(data);
+
+        scene.PolygonLayer({
+            zIndex: 2
+        }).source(data).shape('extrude').size('floor', [0, 2000]).color('rgba(242,246,250,1.0)').animate({
+            enable: true
+        }).style({
+            opacity: 1.0,
+            baseColor: 'rgb(16,16,16)',
+            windowColor: 'rgb(30,60,89)',
+            //brightColor:'rgb(155,217,255)'
+            brightColor: 'rgb(255,176,38)'
+        }).render();
+    });
+</script>
+
+</html>

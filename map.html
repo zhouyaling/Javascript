@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="map-chart" style="width:500px;height: 500px;"></div>
+</body>
+<script src="./lib/echarts.min.js"></script>
+<script src="http://echarts.baidu.com/examples/vendors/echarts/map/js/china.js"></script>
+<script>
+    // 地图
+    function getMapChart() {
+        var myChart = echarts.init(document.getElementById('map-chart'));
+        var data = [{
+            name: '北京',
+            value: Math.round(Math.random() * 1000),
+            selected: true
+        }, {
+            name: '天津',
+            value: Math.round(Math.random() * 1000),
+            selected: true
+        }, {
+            name: '上海',
+            value: Math.round(Math.random() * 1000),
+            selected: true
+        }, {
+            name: '重庆',
+            value: Math.round(Math.random() * 1000),
+            selected: true
+        }, {
+            name: '河北',
+            value: Math.round(Math.random() * 1000),
+            selected: false
+        }, {
+            name: '河南',
+            value: Math.round(Math.random() * 1000)
+        }, {
+            name: '云南',
+            value: Math.round(Math.random() * 1000)
+        }, {
+            name: '辽宁',
+            value: Math.round(Math.random() * 1000)
+        }, {
+            name: '黑龙江',
+            value: Math.round(Math.random() * 1000)
+        }];
+        myChart.setOption(MapChart(data));
+    }
+
+    function MapChart(seriesData) {
+        option = {
+            tooltip: {
+                trigger: 'item'
+            },
+            series: [{
+                name: '省份',
+                type: 'map',
+                mapType: 'china',
+                zoom: 1.2,
+                symbolSize: 20,
+                symbol: 'image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7',
+                label: {
+                    normal: {
+                        show: true,
+                        textStyle: {
+                            fontSize: 12,
+                            color: 'transparent'
+                        }
+                    },
+                    emphasis: {
+                        show: true,
+                        textStyle: {
+                            fontSize: 12,
+                            color: '#fff'
+                        }
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        areaColor: '#11629A', //地图本身的颜色 11629A
+                        borderColor: '#209aff', //省份的边框颜色 3CB4CF
+                        borderWidth: 1, //省份的边框宽度
+                        opacity: 0.8, //图形透明度
+                    },
+                    emphasis: { //高亮状态
+                        areaColor: '#209aff', //高亮时候地图显示的颜色
+                        borderWidth: 0 //高亮时候的边框宽度
+                    },
+
+                },
+                data: seriesData
+            }]
+        };
+        return option;
+    }
+
+    getMapChart();
+</script>
+
+</html>

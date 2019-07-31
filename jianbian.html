@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #btn {
+            position: relative;
+            width: 210px;
+            height: 70px;
+            border: 5px solid transparent;
+            border-radius: 30px;
+            background: #fff;
+            background-clip: padding-box;
+            text-align: center;
+            color: #666666;
+            font-size: 48px;
+        }
+        
+        #btn::after {
+            position: absolute;
+            top: -5px;
+            bottom: -5px;
+            left: -5px;
+            right: -5px;
+            background: linear-gradient(to right, #1F1EB8, #FFFFFF, #625AFF);
+            content: '';
+            z-index: -1;
+            border-radius: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="btn">渐变</div>
+</body>
+
+</html>

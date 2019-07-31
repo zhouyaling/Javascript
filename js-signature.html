@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js-在线签名和涂鸦插件</title>
+    <style>
+        #signature {
+            background: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="js-signature" data-width="600" data-height="200" data-border="1px solid #1ABC9C" data-background="#16A085" data-line-color="#fff" data-auto-fit="true">
+    </div>
+    <div id="signature"></div>
+    <button id="clearBtn" onclick="clearCanvas();">Clear Canvas</button>
+    <button id="saveBtn" onclick="saveSignature();" disabled>Save Signature</button>
+</body>
+<script src="./lib/jquery.min.js"></script>
+<script src="./lib/jq-signature.js"></script>
+<script>
+    $(document).on('ready', function() {
+        $('.js-signature').jqSignature();
+    });
+
+    function clearCanvas() {
+        $('#signature').html('<p><em>Your signature will appear here when you click "Save Signature"</em></p>');
+        $('.js-signature').jqSignature('clearCanvas');
+        $('#saveBtn').attr('disabled', true);
+    }
+
+    function saveSignature() {
+        $('#signature').empty();
+        var dataUrl = $('.js-signature').jqSignature('getDataURL');
+        var img = $('<img>').attr('src', dataUrl);
+        $('#signature').append($('<p>').text("Here's your signature:"));
+        $('#signature').append(img);
+    }
+
+    $('.js-signature').on('jq.signature.changed', function() {
+        $('#saveBtn').attr('disabled', false);
+    });
+</script>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自定义滚动条样式
+    </title>
+    <style>
+        .test {
+            width: 1900px;
+            height: 900px;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            float: left;
+            margin: 5px;
+            border: none;
+        }
+        
+        .scrollbar {
+            width: 2000px;
+            height: 1300px;
+            margin: 0 auto;
+        }
+        
+        .test-1::-webkit-scrollbar {
+            /*滚动条整体样式*/
+            width: 4px;
+            /*高宽分别对应横竖滚动条的尺寸*/
+            height: 1px;
+        }
+        
+        .test-1::-webkit-scrollbar-thumb {
+            /*滚动条里面小方块*/
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            background: #ccc;
+        }
+        
+        .test-1::-webkit-scrollbar-track {
+            /*滚动条里面轨道*/
+            -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            background: #fff;
+        }
+        
+        .test:hover {
+            overflow-y: scroll;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="test test-1">
+        <div class="scrollbar"></div>
+    </div>
+</body>
+
+</html>

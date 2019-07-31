@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>边框效果</title>
+    <style>
+        body {
+            background: #0F222B;
+        }
+        
+        .box {
+            width: 200px;
+            height: 200px;
+            box-sizing: border-box;
+            border: 1px solid #69CA62;
+            background: url(./imgs/logo.png) no-repeat center;
+            background-size: 75%;
+            position: relative;
+            margin: 50px;
+        }
+        
+        .left {
+            position: absolute;
+            left: -5%;
+            width: 3px;
+            height: 110%;
+            background: #69CA62;
+            animation: left-move 5s linear infinite;
+        }
+        
+        .bottom {
+            position: absolute;
+            left: -5%;
+            bottom: -5%;
+            height: 3px;
+            width: 110%;
+            background: #69CA62;
+            animation: bottom-move 5s linear infinite;
+        }
+        
+        .top {
+            position: absolute;
+            right: -5%;
+            top: -5%;
+            height: 3px;
+            width: 110%;
+            background: #69CA62;
+            animation: top-move 5s linear infinite;
+        }
+        
+        .right {
+            position: absolute;
+            right: -5%;
+            top: -5%;
+            height: 110%;
+            width: 3px;
+            background: #69CA62;
+            animation: right-move 5s linear infinite;
+        }
+        
+        @keyframes left-move {
+            0% {
+                height: 110%;
+            }
+            50% {
+                height: 0%;
+            }
+            100% {
+                height: 110%;
+            }
+            0% {
+                bottom: -5%;
+                top: auto;
+            }
+            50% {
+                bottom: -5%;
+                top: auto;
+            }
+            50.5% {
+                top: -5%;
+                bottom: auto;
+            }
+            100% {
+                bottom: auto;
+                top: -5%;
+            }
+        }
+        
+        @keyframes bottom-move {
+            0% {
+                width: 0;
+            }
+            50% {
+                width: 110%;
+            }
+            100% {
+                width: 0;
+            }
+            0% {
+                left: -5%;
+                right: auto;
+            }
+            50% {
+                left: -5%;
+                right: auto;
+            }
+            50.5% {
+                right: -5%;
+                left: auto;
+            }
+            100% {
+                right: -5%;
+                left: auto;
+            }
+        }
+        
+        @keyframes top-move {
+            0% {
+                width: 0;
+            }
+            50% {
+                width: 110%;
+            }
+            100% {
+                width: 0;
+            }
+            0% {
+                right: -5%;
+                left: auto;
+            }
+            50% {
+                right: -5%;
+                left: auto;
+            }
+            50.5% {
+                left: -5%;
+                right: auto;
+            }
+            100% {
+                left: -5%;
+                right: auto;
+            }
+        }
+        
+        @keyframes right-move {
+            0% {
+                height: 110%;
+            }
+            50% {
+                height: 0%;
+            }
+            100% {
+                height: 110%;
+            }
+            0% {
+                top: -5%;
+                bottom: auto;
+            }
+            50% {
+                top: -5%;
+                bottom: auto;
+            }
+            50.5% {
+                bottom: -5%;
+                top: auto;
+            }
+            100% {
+                bottom: -5%;
+                top: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="left"></div>
+        <div class="bottom"></div>
+        <div class="top"></div>
+        <div class="right"></div>
+    </div>
+</body>
+
+</html>

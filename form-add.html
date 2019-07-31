@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>js添加input控件组</title>
+    <script src="./lib/jquery.min.js"></script>
+    <style>
+        .question-group {
+            margin-bottom: 20px;
+        }
+        
+        .answer-group-box {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="questions">
+        <input type="button" value="增加问题" onclick="addQuestion()" />
+
+        <!-- 问题组一 -->
+        <div class='question-group'>
+            <div><input class='question-input' type='text' /> <button onclick='deleteQuestion(this)'>删除问题</button></div>
+            <div>
+                <div class='answer-group-box' id='a-group-1'>
+                    <div class='answer-box'><input class='answer-input' type='text' /> <button onclick='deleteAnswer(this)'>删除选项</button></div>
+                </div><button onclick='addAnswer(1)'>添加选项</button></div>
+        </div>
+    </div>
+
+    <button onclick="save()">保存</button>
+</body>
+
+<script type="text/javascript">
+    var mark = 2;
+
+    // 添加问题
+    function addQuestion() {
+        var htmls =
+            "<div class='question-group'>" +
+            "   <div><input class='question-input' type='text' /> <button onclick='deleteQuestion(this)'>删除问题</button></div>" +
+            "   <div>" +
+            "       <div class='answer-group-box' id='a-group-" + mark + "'>" +
+            "           <div class='answer-box'><input class='answer-input' type='text'/> <button onclick='deleteAnswer(this)'>删除选项</button></div>" +
+            "       </div>" +
+            "       <button onclick='addAnswer(" + mark + ")'>添加选项</button>" +
+            "   </div>" +
+            "</div>";
+
+        $('#questions').append(htmls);
+        mark++;
+    }
+
+    // 删除问题
+    function deleteQuestion(This) {
+        if ($('.question-group').length <= 1) {
+            alert("至少保留一个问题");
+            return;
+        }
+        This.parentNode.parentNode.remove();
+    }
+
+
+    // 添加选项
+    function addAnswer(t) {
+        $('#a-group-' + t).append("<div class='answer-box'><input class='answer-input' type='text'/> <button onclick='deleteAnswer(this)'>删除选项</button></div>");
+    }
+
+    // 删除选项
+    function deleteAnswer(This) {
+        if ($(This.parentNode.parentNode).find('.answer-box').length <= 1) {
+            alert("每个问题至少保留一个答案");
+            return;
+        }
+        This.parentNode.remove();
+    }
+
+    // 保存数据
+    var dataGroup = [];
+
+    function save() {
+        /* dataGroup.push({
+            "question": "今天星期几?",
+            "answer": ["星期一", "星期二"]
+        }); */
+        dataGroup = [];
+        $('.question-group').each(function(index, item) {
+            var q = $(item).find('.question-input').val();
+
+            var a = [];
+            $(item).find('.answer-box').each(function(index, childiten) {
+                a.push($(childiten).find('.answer-input').val());
+            });
+
+            dataGroup.push({
+                "question": q,
+                "answer": a
+            })
+        });
+        console.log(dataGroup);
+    }
+</script>
+
+</html>

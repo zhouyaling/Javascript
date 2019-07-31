@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>表格向下滚动demo</title>
+    <style>
+        table {
+            width: 500px;
+            border: 1px solid gray;
+            border-collapse: collapse;
+        }
+        
+        th,
+        td {
+            line-height: 35px;
+            border: 1px solid gray;
+            text-align: center;
+            width: 120px;
+        }
+        
+        .scroll-box {
+            height: 222px;
+            width: 500px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .tab-scroll {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            border-top: none;
+        }
+        
+        .tab-scroll td {
+            border-top: none;
+        }
+    </style>
+</head>
+
+<body>
+    <table class="top">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>住址</th>
+            </tr>
+        </thead>
+    </table>
+    <div class="scroll-box">
+        <table class="tab-scroll">
+            <tbody id="test">
+                <tr>
+                    <td>1001</td>
+                    <td>李四</td>
+                    <td>AAAA</td>
+                    <td>AAAA</td>
+                </tr>
+                <tr>
+                    <td>1002</td>
+                    <td>王五</td>
+                    <td>AAAA</td>
+                    <td>AAAA</td>
+                </tr>
+                <tr>
+                    <td>1003</td>
+                    <td>王五</td>
+                    <td>AAAA</td>
+                    <td>AAAA</td>
+                </tr>
+                <tr>
+                    <td>1004</td>
+                    <td>Jack</td>
+                    <td>AAAA</td>
+                    <td>AAAA</td>
+                </tr>
+                <tr>
+                    <td>1005</td>
+                    <td>小兰</td>
+                    <td>AAAA</td>
+                    <td>AAAA</td>
+                </tr>
+                <tr>
+                    <td>1006</td>
+                    <td>王五</td>
+                    <td>AAAA</td>
+                    <td>AAAA</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+<script>
+    var sTab = document.getElementsByClassName('tab-scroll')[0]; //要滚动的表
+    var i = 0;
+
+    function scrollTop() {
+        var topinfo = sTab.getElementsByTagName('tr')[0]; // 最顶部的一条数据
+        var trinfo = topinfo.cloneNode(true);
+        var tbody = document.getElementById('test').insertBefore(trinfo, topinfo); //要添加的表格的内容
+        sTab.style.transition = '1s'; //把过渡动画设为一秒
+        i -= 37;
+        sTab.style.bottom = i + 'px'; //改变表的top值
+        console.log("外面：" + sTab.getElementsByTagName('tr').length);
+
+        if (sTab.getElementsByTagName('tr').length >= 10) {
+            setTimeout(function() {
+                for (var k = sTab.getElementsByTagName('tr').length; k > 6; k--) {
+                    console.log("里面：" + sTab.getElementsByTagName('tr').length);
+                    sTab.getElementsByTagName('tr')[k - 1].remove();
+
+                }
+                sTab.style.transition = "0s";
+                sTab.style.bottom = 0;
+                i = 0;
+            }, 1000);
+        }
+    }
+
+    setInterval(scrollTop, 5000);
+</script>
+
+</html>

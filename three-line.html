@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>thringjs 绘制线条 以及文字</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+        
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .info {
+            position: absolute;
+            top: 10px;
+            width: 100%;
+            text-align: center;
+            z-index: 100;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="info">Description</div>
+</body>
+<script src="./lib/three.js"></script>
+<script>
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500);
+    var renderer = new THREE.WebGLRenderer();
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    // 创建一个线条
+    var material = new THREE.LineBasicMaterial({
+        color: 0x0000ff
+    });
+    var geometry = new THREE.Geometry();
+    geometry.vertices.push(new THREE.Vector3(-10, 0, 0));
+    geometry.vertices.push(new THREE.Vector3(0, 10, 0));
+    geometry.vertices.push(new THREE.Vector3(10, 0, 0));
+    var line = new THREE.Line(geometry, material);
+
+    camera.position.set(0, 0, 100);
+    camera.lookAt(new THREE.Vector3(0, 0, 0));
+    scene.add(line);
+
+    var render = function() {
+        renderer.render(scene, camera);
+    }
+    render();
+</script>
+
+</html>
