@@ -1,0 +1,108 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body,
+html {
+    padding: 0;
+}
+
+body {
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.container {
+    /*  display: flex;
+    justify-content: center;
+    flex-wrap: wrap; */
+    display: inline-block;
+    width: 100%;
+    margin: 0 4%;
+    margin-bottom: 3%;
+}
+
+.card {
+    float: left;
+    width: 19.5%;
+    margin: 3% 1.7% 0;
+    border-radius: 10px;
+    height: 200px;
+    position: relative;
+    transition: all 0.6s;
+}
+
+.card:hover {
+    transform: scale3d(1.08, 1.08, 1);
+    box-shadow: 0 0 17px 0 rgba(0, 0, 0, 0.3);
+}
+
+.card p:nth-of-type(1) {
+    font-weight: 700;
+    font-size: 32px;
+    color: #FFFFFF;
+    margin: 6.5% 0 3% 7%;
+}
+
+.card p:nth-of-type(2) {
+    font-size: 16px;
+    color: #FFFFFF;
+    margin: 0 0 0 7%;
+}
+
+.card-icon {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 70%;
+    text-align: right;
+}
+
+.card-icon img {
+    height: 100%;
+}
+
+.card:nth-child(11n+1) {
+    background-image: linear-gradient(to right, #C19B66 0%, #D9B37F 100%);
+}
+
+.card:nth-child(11n+2) {
+    background-image: linear-gradient(to right, #FF9B66 0%, #FAA84B 100%);
+}
+
+.card:nth-child(11n+3) {
+    background-image: linear-gradient(to right, #FF5138 0%, #FE7057 100%);
+}
+
+.card:nth-child(11n+4) {
+    background-image: linear-gradient(to bottom, #202494 0%, #844BCF 98%);
+}
+
+.card:nth-child(11n+5) {
+    background-image: linear-gradient(to right, #82EAFF 0%, #5696FF 100%);
+}
+
+.card:nth-child(11n+6) {
+    background-image: linear-gradient(to right, #FF5138 0%, #FE7057 100%);
+}
+
+.card:nth-child(11n+7) {
+    background-image: linear-gradient(to right, #C19B66 0%, #D9B37F 100%);
+}
+
+.card:nth-child(11n+8) {
+    background-image: linear-gradient( to right, #4FA2FF 0%, #5F67F6 100%);
+}
+
+.card:nth-child(11n+9) {
+    background-image: linear-gradient(to bottom, #202494 0%, #844BCF 98%);
+}
+
+.card:nth-child(11n+10) {
+    background-image: linear-gradient( to right, #4FA2FF 0%, #5F67F6 100%);
+}
+
+.card:nth-child(11n+11) {
+    background-image: linear-gradient(to right, #FF9B66 0%, #FAA84B 100%);
+}

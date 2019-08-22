@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>呼吸灯效果</title>
+    <style>
+        body {
+            background: #000;
+        }
+        
+        .breathe-div {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #2b92d4;
+            border-radius: 50%;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            animation: breathe 1.5s ease-in-out infinite alternate;
+        }
+        
+        @keyframes breathe {
+            0% {
+                opacity: 0.4;
+                box-shadow: 0 1px 2px rgba(0, 147, 223, 0.4), 0 1px 1px rgba(0, 147, 223, 0.1) inset;
+            }
+            100% {
+                opacity: 1;
+                box-shadow: 0 1px 30px rgba(0, 147, 223, 1), 0 1px 20px rgba(0, 147, 223, 1) inset;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="breathe-div"></div>
+</body>
+
+</html>

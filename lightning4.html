@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>闪电</title>
+<style type="text/css">
+*{
+margin: 0;
+padding: 0;
+overflow: hidden;
+}
+#canvas{
+background-color: black;
+}
+</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script type="text/javascript">
+var can=document.getElementById("canvas");
+var cxt=can.getContext("2d");
+var w=can.width=window.innerWidth;
+var h=can.height=window.innerHeight;
+window.onresize=function(){
+	 w=can.width=window.innerWidth;
+	 h=can.height=window.innerHeight;
+}
+//画一条线，这条线要不规则
+function rx(){
+	var x=Math.random()*100>>2;
+	if(x%2==0){
+		x=-x;
+	}else{
+		x=x;
+	}
+	return x;
+	}//不规则数x
+var y=Math.random()*500+100>>2;//不规则数y
+/* var y1=y;
+ cxt.moveTo(600,100);
+//中间几个折读数不定
+while(y1<h){
+cxt.lineTo(600+rx(),y1);
+y1+=y;
+}  
+cxt.lineTo(600+rx(),h);
+cxt.strokeStyle="blue";
+cxt.stroke();  */
+//一个动态的线
+function lightning(){
+setInterval(function(){
+	var y1=y;
+		cxt.clearRect(0,0,w,h);
+	cxt.beginPath();
+	 cxt.moveTo(600,10);
+	//中间几个折读数不定
+	while(y1<h){
+	cxt.lineTo(600+rx(),y1);
+	y1+=y;
+	}  
+	cxt.lineTo(600+rx(),h);
+	cxt.strokeStyle="blue";
+	cxt.stroke(); 
+},300);}
+setInterval(lightning,30);
+</script>
+</body>
+</html>

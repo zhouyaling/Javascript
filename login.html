@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>大管家巡航系统</title>
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="login-box">
+            <h2>大管家巡航系统</h2>
+            <div class="login-form">
+                <div>
+                    <input name="username" type="text" placeholder="请输入用户名">
+                </div>
+                <div>
+                    <input name="password" type="password" placeholder="请输入密码">
+                </div>
+                <div class="login-btn">登录</div>
+            </div>
+            <p>温馨提示：为保证您的使用体验，建议使用<span> 谷歌 火狐浏览器</span></p>
+        </div>
+    </div>
+</body>
+<script src="./lib/jquery.min.js"></script>
+<script>
+    // 文本框获得焦点
+    $('input').focus(function() {
+        $(this).addClass('active');
+        $(this).parent().addClass('active');
+    });
+
+    // 文本框失去焦点
+    $('input').blur(function() {
+        $(this).removeClass('active');
+        $(this).parent().removeClass('active');
+    });
+
+    // 回车键快捷登录
+    document.onkeydown = function() {
+        if (event.keyCode == 13) {
+            $('.login-btn').text("Loading...");
+        }
+    }
+</script>
+
+</html>
